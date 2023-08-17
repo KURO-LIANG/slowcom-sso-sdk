@@ -2,6 +2,7 @@ package service
 
 import (
 	"fmt"
+	"github.com/google/go-querystring/query"
 	"github.com/kuro-liang/slowcom-sso-sdk/app/business/entity"
 	"github.com/kuro-liang/slowcom-sso-sdk/http"
 )
@@ -11,26 +12,14 @@ type SSORequest struct {
 }
 
 // GetUserInfo 获取用户登录的信息
-func (s *SSORequest) GetUserInfo() (resData *entity.BaseUserInfo, err error) {
-	res, err := s.SSOClient.Get("/api/wx/user/info")
-	if err == nil {
-		resData = res.Data.(*entity.BaseUserInfo)
+func (s *SSORequest) GetUserInfo(req *entity.UserInfoReq) (resData *entity.BaseUserInfo, err error) {
+	url := "/api/wx/user/info"
+	if req != nil {
+		values, _ := query.Values(req)
+		queryStr := values.Encode()
+		url = fmt.Sprint(url, "?", queryStr)
 	}
-	return
-}
-
-// GetUserInfoByPhone 通过手机号查询用户信息
-func (s *SSORequest) GetUserInfoByPhone(phone string) (resData *entity.BaseUserInfo, err error) {
-	res, err := s.SSOClient.Get("/api/wx/user/info?phone=" + phone)
-	if err == nil {
-		resData = res.Data.(*entity.BaseUserInfo)
-	}
-	return
-}
-
-// GetUserInfoById 通过用户id查询用户信息
-func (s *SSORequest) GetUserInfoById(id uint64) (resData *entity.BaseUserInfo, err error) {
-	res, err := s.SSOClient.Get(fmt.Sprint("/api/wx/user/info?id=", id))
+	res, err := s.SSOClient.Get(url)
 	if err == nil {
 		resData = res.Data.(*entity.BaseUserInfo)
 	}

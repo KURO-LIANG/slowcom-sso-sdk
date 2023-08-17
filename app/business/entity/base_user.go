@@ -9,3 +9,7 @@ type BaseUserInfo struct {
 	MaOpenId  string `json:"maOpenId" description:"小程序openid"` // 小程序openid
 	UnionId   string `json:"unionId" description:"微信开放平台id"`   // 微信开放平台id
 }
+type UserInfoReq struct {
+	Phone string `json:"phone" description:"手机号"` // id
+	Id    uint64 `json:"id" description:"用户ID"`   // 用户ID
+}
