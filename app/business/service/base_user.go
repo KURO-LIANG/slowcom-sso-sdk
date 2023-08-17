@@ -10,8 +10,8 @@ type SSORequest struct {
 }
 
 // GetUserInfo 获取用户登录的信息
-func (s *SSORequest) GetUserInfo() (resData *entity.BaseUserInfo, err error) {
-	res, err := s.SSOClient.Get("/api/wx/user/info")
+func (s *SSORequest) GetUserInfo(phone string) (resData *entity.BaseUserInfo, err error) {
+	res, err := s.SSOClient.Get("/api/wx/user/info?phone=" + phone)
 	if err == nil {
 		resData = res.Data.(*entity.BaseUserInfo)
 	}
