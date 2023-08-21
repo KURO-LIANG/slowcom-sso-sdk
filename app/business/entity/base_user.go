@@ -13,3 +13,12 @@ type UserInfoReq struct {
 	Phone string `json:"phone" description:"手机号"` // id
 	Id    uint64 `json:"id" description:"用户ID"`   // 用户ID
 }
+
+type BaseUserChannelInfo struct {
+	UserId     uint64 `json:"userId" description:"用户ID"`   // 用户ID
+	NickName   string `json:"nickName" description:"用户昵称"` // 用户昵称
+	MpOpenId   string `json:"mpOpenId" description:"用户的公众号openid"`
+	AppID      string `json:"appId" description:"用户所在渠道的公众号id"`
+	TemplateId string `json:"templateId" description:"用户所在渠道的公众号模板消息ID"`
+	MiniAppId  string `json:"miniAppId" description:"用户所在渠道的小程序id"`
+}

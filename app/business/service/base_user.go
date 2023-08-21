@@ -25,3 +25,13 @@ func (s *SSORequest) GetUserInfo(req *entity.UserInfoReq) (resData *entity.BaseU
 	}
 	return
 }
+
+// UserChannelInfo 获取用户渠道信息
+func (s *SSORequest) UserChannelInfo(ids []uint64) (list []*entity.BaseUserChannelInfo, err error) {
+	url := fmt.Sprint("/api/wx/user/channel/info?ids=", ids)
+	res, err := s.SSOClient.Get(url)
+	if err == nil {
+		list = res.Data.([]*entity.BaseUserChannelInfo)
+	}
+	return
+}
