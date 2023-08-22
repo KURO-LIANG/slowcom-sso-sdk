@@ -19,6 +19,7 @@ type BaseUserChannelInfo struct {
 	NickName   string `json:"nickName" description:"用户昵称"` // 用户昵称
 	MpOpenId   string `json:"mpOpenId" description:"用户的公众号openid"`
 	AppID      string `json:"appId" description:"用户所在渠道的公众号id"`
+	AppSecret  string `json:"appSecret" description:"公众号appSecret"` // 公众号appSecret
 	TemplateId string `json:"templateId" description:"用户所在渠道的公众号模板消息ID"`
 	MiniAppId  string `json:"miniAppId" description:"用户所在渠道的小程序id"`
 }
