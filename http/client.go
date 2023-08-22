@@ -8,9 +8,9 @@ import (
 )
 
 type SSOClient struct {
-	BaseUrl      string
-	Token  string
-	rwLock       sync.RWMutex
+	BaseUrl string
+	Token   string
+	rwLock  sync.RWMutex
 }
 
 const (
@@ -34,6 +34,14 @@ func buildHttpClient() *httpclient.HttpClient {
 func (s *SSOClient) Get(url string) (response *BaseRes, err error) {
 	res, err := buildHttpClient().WithHeader("Authorization", "Bearer "+s.Token).
 		Get(fmt.Sprintf("%s%s", s.BaseUrl, url), netUrl.Values{})
+	response, err = checkResponse(res, err)
+	return
+}
+
+// PostJson json请求
+func (s *SSOClient) PostJson(url string, data interface{}) (response *BaseRes, err error) {
+	res, err := buildHttpClient().WithHeader("Authorization", "Bearer "+s.Token).
+		PostJson(fmt.Sprintf("%s%s", s.BaseUrl, url), data)
 	response, err = checkResponse(res, err)
 	return
 }

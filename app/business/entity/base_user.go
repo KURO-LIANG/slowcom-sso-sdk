@@ -14,6 +14,9 @@ type UserInfoReq struct {
 	Id    uint64 `json:"id" description:"用户ID"`   // 用户ID
 }
 
+type BaseUserChannelInfoReq struct {
+	Ids []uint64 `json:"ids" description:"用户Ids"` // 用户ID
+}
 type BaseUserChannelInfo struct {
 	UserId     uint64 `json:"userId" description:"用户ID"`   // 用户ID
 	NickName   string `json:"nickName" description:"用户昵称"` // 用户昵称
