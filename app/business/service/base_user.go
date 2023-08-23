@@ -32,7 +32,8 @@ func (s *SSORequest) UserChannelInfo(ids []uint64) (list []*entity.BaseUserChann
 		"ids": ids,
 	})
 	if err == nil {
-		list = res.Data.([]*entity.BaseUserChannelInfo)
+		data := res.Data.(map[string]interface{})
+		list = data["list"].([]*entity.BaseUserChannelInfo)
 	}
 	return
 }
