@@ -33,7 +33,20 @@ func (s *SSORequest) UserChannelInfo(ids []uint64) (list []*entity.BaseUserChann
 	})
 	if err == nil {
 		data := res.Data.(map[string]interface{})
-		list = data["list"].([]*entity.BaseUserChannelInfo)
+		dataList := data["list"].([]interface{})
+		for i := range dataList {
+			itemMap := dataList[i].(map[string]interface{})
+			var userInfo entity.BaseUserChannelInfo
+			userInfo.UserId = uint64(itemMap["userId"].(float64))
+			userInfo.NickName = itemMap["nickName"].(string)
+			userInfo.MpOpenId = itemMap["mpOpenId"].(string)
+			userInfo.AppID = itemMap["appId"].(string)
+			userInfo.AppSecret = itemMap["appSecret"].(string)
+			userInfo.TemplateId = itemMap["templateId"].(string)
+			userInfo.MiniAppId = itemMap["miniAppId"].(string)
+
+			list = append(list, &userInfo)
+		}
 	}
 	return
 }
