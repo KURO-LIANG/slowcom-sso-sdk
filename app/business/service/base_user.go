@@ -1,6 +1,7 @@
 package service
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/google/go-querystring/query"
 	"github.com/kuro-liang/slowcom-sso-sdk/app/business/entity"
@@ -23,40 +24,22 @@ func (s *SSORequest) GetUserInfo(req *entity.UserInfoReq) (resData *entity.BaseU
 	if err == nil {
 		var mapData = res.Data.(map[string]interface{})
 		user := mapData["userInfo"].(map[string]interface{})
-		resData = &entity.BaseUserInfo{
-			Id:        user["id"].(uint64),
-			NickName:  user["nickName"].(string),
-			Avatar:    user["avatar"].(string),
-			Phone:     user["phone"].(string),
-			ChannelId: user["channelId"].(uint64),
-			MaOpenId:  user["maOpenId"].(string),
-			UnionId:   user["unionId"].(string),
-		}
+		d, _ := json.Marshal(user)
+		_ = json.Unmarshal(d, &resData)
 	}
 	return
 }
 
 // UserChannelInfo 获取用户渠道信息
-func (s *SSORequest) UserChannelInfo(ids []uint64) (list []*entity.BaseUserChannelInfo, err error) {
+func (s *SSORequest) UserChannelInfo(ids []uint64) (list []entity.BaseUserChannelInfo, err error) {
 	res, err := s.SSOClient.PostJson("/api/v1/wx/mini/user/channel/info", map[string]interface{}{
 		"ids": ids,
 	})
 	if err == nil {
 		data := res.Data.(map[string]interface{})
 		dataList := data["list"].([]interface{})
-		for i := range dataList {
-			itemMap := dataList[i].(map[string]interface{})
-			var userInfo entity.BaseUserChannelInfo
-			userInfo.UserId = uint64(itemMap["userId"].(float64))
-			userInfo.NickName = itemMap["nickName"].(string)
-			userInfo.MpOpenId = itemMap["mpOpenId"].(string)
-			userInfo.AppID = itemMap["appId"].(string)
-			userInfo.AppSecret = itemMap["appSecret"].(string)
-			userInfo.TemplateId = itemMap["templateId"].(string)
-			userInfo.MiniAppId = itemMap["miniAppId"].(string)
-
-			list = append(list, &userInfo)
-		}
+		d, _ := json.Marshal(dataList)
+		_ = json.Unmarshal(d, &list)
 	}
 	return
 }

@@ -9,11 +9,12 @@ import (
 func main() {
 	client := service.SSORequest{SSOClient: &http.SSOClient{
 		BaseUrl: "https://wx.api.sso.slowcom.cn",
+		Token:   "Bearer B5idb5D01+uHITLlexQMUTZjaveDxr8qgbGroLZJVqQpBKSXuVmDDr9/vaZ8vAK7DGLBCKFsef4+0k7TpIAvmF1UTXyO4Q0iruS3S1WH9sMIlfiNpeyVr3Wi/aSNKJ2UlxNskUy/WoJC8TNSkgCrsg==",
 	}}
-	list, err := client.UserChannelInfo([]uint64{11, 9})
+	res, err := client.UserChannelInfo([]uint64{10, 9})
 	if err != nil {
 		fmt.Printf("错误：%s", err.Error())
 		return
 	}
-	fmt.Printf("数据条数：%d", len(list))
+	fmt.Printf("数据：%+v", res)
 }
