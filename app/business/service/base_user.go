@@ -22,14 +22,15 @@ func (s *SSORequest) GetUserInfo(req *entity.UserInfoReq) (resData *entity.BaseU
 	res, err := s.SSOClient.Get(url)
 	if err == nil {
 		var mapData = res.Data.(map[string]interface{})
+		user := mapData["userInfo"].(map[string]interface{})
 		resData = &entity.BaseUserInfo{
-			Id:        mapData["id"].(uint64),
-			NickName:  mapData["nickName"].(string),
-			Avatar:    mapData["avatar"].(string),
-			Phone:     mapData["phone"].(string),
-			ChannelId: mapData["channelId"].(uint64),
-			MaOpenId:  mapData["maOpenId"].(string),
-			UnionId:   mapData["unionId"].(string),
+			Id:        user["id"].(uint64),
+			NickName:  user["nickName"].(string),
+			Avatar:    user["avatar"].(string),
+			Phone:     user["phone"].(string),
+			ChannelId: user["channelId"].(uint64),
+			MaOpenId:  user["maOpenId"].(string),
+			UnionId:   user["unionId"].(string),
 		}
 	}
 	return
