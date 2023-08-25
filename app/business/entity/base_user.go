@@ -10,8 +10,9 @@ type BaseUserInfo struct {
 	UnionId   string `json:"unionId" description:"微信开放平台id"`   // 微信开放平台id
 }
 type UserInfoReq struct {
-	Phone string `json:"phone" description:"手机号"` // id
-	Id    uint64 `json:"id" description:"用户ID"`   // 用户ID
+	Phone string   `json:"phone" description:"手机号"` // id
+	Id    uint64   `json:"id" description:"用户ID"`   // 用户ID
+	Ids   []uint64 `json:"ids" description:"用户ID列表"`
 }
 
 type BaseUserChannelInfoReq struct {
