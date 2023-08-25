@@ -43,3 +43,17 @@ func (s *SSORequest) UserChannelInfo(ids []uint64) (list []entity.BaseUserChanne
 	}
 	return
 }
+
+// UserInfoList 批量获取用户信息
+func (s *SSORequest) UserInfoList(ids []uint64) (list []entity.BaseUserInfo, err error) {
+	res, err := s.SSOClient.PostJson("/api/v1/wx/mini/user/infoList", map[string]interface{}{
+		"ids": ids,
+	})
+	if err == nil {
+		data := res.Data.(map[string]interface{})
+		dataList := data["list"].([]interface{})
+		d, _ := json.Marshal(dataList)
+		_ = json.Unmarshal(d, &list)
+	}
+	return
+}
