@@ -45,3 +45,11 @@ func (s *SSOClient) PostJson(url string, data interface{}) (response *BaseRes, e
 	response, err = checkResponse(res, err)
 	return
 }
+
+// PutJson json请求
+func (s *SSOClient) PutJson(url string, data interface{}) (response *BaseRes, err error) {
+	res, err := buildHttpClient().WithHeader("Authorization", s.Token).
+		PutJson(fmt.Sprintf("%s%s", s.BaseUrl, url), data)
+	response, err = checkResponse(res, err)
+	return
+}

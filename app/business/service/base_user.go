@@ -57,3 +57,11 @@ func (s *SSORequest) UserInfoList(ids []uint64) (list []entity.BaseUserInfo, err
 	}
 	return
 }
+
+// UpdatePhone 修改账号手机号
+func (s *SSORequest) UpdatePhone(phone string) (err error) {
+	_, err = s.SSOClient.PutJson("/api/v1/wx/mini/user/updatePhone", map[string]interface{}{
+		"phone": phone,
+	})
+	return
+}
