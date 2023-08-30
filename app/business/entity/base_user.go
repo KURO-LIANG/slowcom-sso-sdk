@@ -31,3 +31,11 @@ type BaseUserChannelInfo struct {
 	TemplateId string `json:"templateId" description:"用户所在渠道的公众号模板消息ID"`
 	MiniAppId  string `json:"miniAppId" description:"用户所在渠道的小程序id"`
 }
+
+type RefreshTokenRes struct {
+	UserInfo   *BaseUserInfo `json:"userInfo" description:"用户信息"`
+	Token      string        `json:"token" description:"token"`
+	ExpireTime int64         `json:"expireTime" description:"过期时间"`
+	MaOpenId   string        `json:"maOpenId" description:"小程序openid"` // 小程序openid
+	UnionId    string        `json:"unionId" description:"微信开放平台id"`   // 微信开放平台id
+}

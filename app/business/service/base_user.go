@@ -65,3 +65,13 @@ func (s *SSORequest) UpdatePhone(phone string) (err error) {
 	})
 	return
 }
+
+// RefreshToken 刷新登录TOKEN
+func (s *SSORequest) RefreshToken() (refreshRes entity.RefreshTokenRes, err error) {
+	res, err := s.SSOClient.Get("/api/v1/wx/mini/login/refreshToken")
+	if err == nil {
+		d, _ := json.Marshal(res.Data)
+		_ = json.Unmarshal(d, &refreshRes)
+	}
+	return
+}
