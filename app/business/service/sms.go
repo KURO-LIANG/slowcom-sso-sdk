@@ -9,8 +9,8 @@ type SSOSmsRequest struct {
 	SSOSmsClient *http.SSOClient
 }
 
-// SendVoiceNotice 发送设备报警通知
-func (s *SSOSmsRequest) SendVoiceNotice(req *entity.SendDeviceNoticeReq) (res *http.BaseRes, err error) {
+// SendDeviceNotice 发送设备报警通知
+func (s *SSOSmsRequest) SendDeviceNotice(req *entity.SendDeviceNoticeReq) (res *http.BaseRes, err error) {
 	res, err = s.SSOSmsClient.PostJson("/api/v1/sms/notice/sendDeviceNotice", req)
 	return
 }
