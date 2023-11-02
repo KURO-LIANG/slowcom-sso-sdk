@@ -7,7 +7,7 @@ import (
 )
 
 type SSOChannelRequest struct {
-	SSOChannelClient *http.SSOClient
+	SSOChannelClient *http.SSOPlatformClient
 }
 
 // ChannelList 获取平台列表信息
