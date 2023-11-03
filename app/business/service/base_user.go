@@ -51,6 +51,9 @@ func (s *SSOUserRequest) UserInfoList(ids []uint64) (list []entity.BaseUserInfo,
 	})
 	if err == nil {
 		data := res.Data.(map[string]interface{})
+		if data["list"] == nil {
+			return
+		}
 		dataList := data["list"].([]interface{})
 		d, _ := json.Marshal(dataList)
 		_ = json.Unmarshal(d, &list)
