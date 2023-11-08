@@ -34,8 +34,8 @@ func (s *SSOPlatformRequest) GetPlatformInfo(id uint64) (resData entity.ChannelI
 			return
 		}
 		var mapData = res.Data.(map[string]interface{})
-		channel := mapData["channel"].(map[string]interface{})
-		d, _ := json.Marshal(channel)
+		platformInfo := mapData["platformInfo"].(map[string]interface{})
+		d, _ := json.Marshal(platformInfo)
 		_ = json.Unmarshal(d, &resData)
 	}
 	return
