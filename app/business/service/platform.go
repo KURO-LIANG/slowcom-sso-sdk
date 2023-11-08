@@ -27,7 +27,7 @@ type SSOPlatformRequest struct {
 
 // GetPlatformInfo 获取平台信息
 func (s *SSOPlatformRequest) GetPlatformInfo(id uint64) (resData entity.ChannelInfo, err error) {
-	res, err := s.SSOPlatformClient.Get(fmt.Sprint("/platform/v1/channel/info?id=", id))
+	res, err := s.SSOPlatformClient.Get(fmt.Sprint("/platform/v1/info?id=", id))
 	if err == nil {
 		if res.Code != 0 {
 			err = errors.New(res.Message)
