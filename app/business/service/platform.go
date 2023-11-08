@@ -8,13 +8,13 @@ import (
 	"github.com/kuro-liang/slowcom-sso-sdk/http"
 )
 
-type SSOChannelRequest struct {
-	SSOChannelClient *http.SSOPlatformClient
+type SSOPlatformRequest struct {
+	SSOPlatformClient *http.SSOPlatformClient
 }
 
 // ChannelList 获取平台列表信息
-//func (s *SSOChannelRequest) ChannelList() (list interface{}, err error) {
-//	res, err := s.SSOChannelClient.Get("/api/v1/channel/getAll")
+//func (s *SSOPlatformRequest) ChannelList() (list interface{}, err error) {
+//	res, err := s.SSOPlatformClient.Get("/api/v1/channel/getAll")
 //	if err == nil {
 //		if res.Code != 0 {
 //			err = errors.New(res.Message)
@@ -25,9 +25,9 @@ type SSOChannelRequest struct {
 //	return
 //}
 
-// GetChannelById 获取平台信息
-func (s *SSOChannelRequest) GetChannelById(id uint64) (resData entity.ChannelInfo, err error) {
-	res, err := s.SSOChannelClient.Get(fmt.Sprint("/platform/v1/channel/info?id=", id))
+// GetPlatformInfo 获取平台信息
+func (s *SSOPlatformRequest) GetPlatformInfo(id uint64) (resData entity.ChannelInfo, err error) {
+	res, err := s.SSOPlatformClient.Get(fmt.Sprint("/platform/v1/channel/info?id=", id))
 	if err == nil {
 		if res.Code != 0 {
 			err = errors.New(res.Message)
