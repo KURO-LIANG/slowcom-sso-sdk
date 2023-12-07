@@ -41,16 +41,13 @@ func (s *SSOPlatformRequest) GetPlatformInfo(id uint64) (resData entity.ChannelI
 	return
 }
 
-// UserInfoList 批量获取用户信息
-func (s *SSOPlatformRequest) UserInfoList(ids []uint64) (list []entity.BaseUserInfo, err error) {
-	res, err := s.SSOPlatformClient.PostJson("/platform/v1/userInfoList", map[string]interface{}{
+// UserChannelInfo 获取用户渠道信息
+func (s *SSOPlatformRequest) UserChannelInfo(ids []uint64) (list []entity.BaseUserChannelInfo, err error) {
+	res, err := s.SSOPlatformClient.PostJson("/platform/v1/userChannelInfo", map[string]interface{}{
 		"ids": ids,
 	})
 	if err == nil {
 		data := res.Data.(map[string]interface{})
-		if data["list"] == nil {
-			return
-		}
 		dataList := data["list"].([]interface{})
 		d, _ := json.Marshal(dataList)
 		_ = json.Unmarshal(d, &list)

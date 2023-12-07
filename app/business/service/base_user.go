@@ -30,13 +30,16 @@ func (s *SSOUserRequest) GetUserInfo(req *entity.UserInfoReq) (resData *entity.B
 	return
 }
 
-// UserChannelInfo 获取用户渠道信息
-func (s *SSOUserRequest) UserChannelInfo(ids []uint64) (list []entity.BaseUserChannelInfo, err error) {
-	res, err := s.SSOUserClient.PostJson("/api/v1/wx/mini/user/channel/info", map[string]interface{}{
+// UserInfoList 批量获取用户信息
+func (s *SSOUserRequest) UserInfoList(ids []uint64) (list []entity.BaseUserInfo, err error) {
+	res, err := s.SSOUserClient.PostJson("/api/v1/wx/mini/user/infoList", map[string]interface{}{
 		"ids": ids,
 	})
 	if err == nil {
 		data := res.Data.(map[string]interface{})
+		if data["list"] == nil {
+			return
+		}
 		dataList := data["list"].([]interface{})
 		d, _ := json.Marshal(dataList)
 		_ = json.Unmarshal(d, &list)
