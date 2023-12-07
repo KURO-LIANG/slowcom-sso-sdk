@@ -40,3 +40,20 @@ func (s *SSOPlatformRequest) GetPlatformInfo(id uint64) (resData entity.ChannelI
 	}
 	return
 }
+
+// UserInfoList 批量获取用户信息
+func (s *SSOUserRequest) UserInfoList(ids []uint64) (list []entity.BaseUserInfo, err error) {
+	res, err := s.SSOUserClient.PostJson("/platform/v1/userInfoList", map[string]interface{}{
+		"ids": ids,
+	})
+	if err == nil {
+		data := res.Data.(map[string]interface{})
+		if data["list"] == nil {
+			return
+		}
+		dataList := data["list"].([]interface{})
+		d, _ := json.Marshal(dataList)
+		_ = json.Unmarshal(d, &list)
+	}
+	return
+}
