@@ -12,19 +12,6 @@ type SSOPlatformRequest struct {
 	SSOPlatformClient *http.SSOPlatformClient
 }
 
-// ChannelList 获取平台列表信息
-//func (s *SSOPlatformRequest) ChannelList() (list interface{}, err error) {
-//	res, err := s.SSOPlatformClient.Get("/api/v1/channel/getAll")
-//	if err == nil {
-//		if res.Code != 0 {
-//			err = errors.New(res.Message)
-//			return
-//		}
-//		list = res.Data
-//	}
-//	return
-//}
-
 // GetPlatformInfo 获取平台信息
 func (s *SSOPlatformRequest) GetPlatformInfo(id uint64) (resData entity.ChannelInfo, err error) {
 	res, err := s.SSOPlatformClient.Get(fmt.Sprint("/platform/v1/info?id=", id))
@@ -52,5 +39,11 @@ func (s *SSOPlatformRequest) UserChannelInfo(ids []uint64) (list []entity.BaseUs
 		d, _ := json.Marshal(dataList)
 		_ = json.Unmarshal(d, &list)
 	}
+	return
+}
+
+// SendMpTemplateNotice 发送模板消息通知
+func (s *SSOPlatformRequest) SendMpTemplateNotice(req *entity.MpTemplateReq) (res *http.BaseRes, err error) {
+	res, err = s.SSOPlatformClient.PostJson("/platform/v1/mp/template/notice", req)
 	return
 }
