@@ -29,9 +29,10 @@ func (s *SSOPlatformRequest) GetPlatformInfo(id uint64) (resData entity.ChannelI
 }
 
 // UserChannelInfo 获取用户渠道信息
-func (s *SSOPlatformRequest) UserChannelInfo(ids []uint64) (list []entity.BaseUserChannelInfo, err error) {
+func (s *SSOPlatformRequest) UserChannelInfo(ids []uint64, clientId string) (list []entity.BaseUserChannelInfo, err error) {
 	res, err := s.SSOPlatformClient.PostJson("/platform/v1/userChannelInfo", map[string]interface{}{
-		"ids": ids,
+		"ids":      ids,
+		"clientId": clientId,
 	})
 	if err == nil {
 		data := res.Data.(map[string]interface{})

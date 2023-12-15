@@ -31,10 +31,9 @@ func (s *SSOUserRequest) GetUserInfo(req *entity.UserInfoReq) (resData *entity.B
 }
 
 // UserInfoList 批量获取用户信息
-func (s *SSOUserRequest) UserInfoList(ids []uint64, clientId string) (list []entity.BaseUserInfo, err error) {
+func (s *SSOUserRequest) UserInfoList(ids []uint64) (list []entity.BaseUserInfo, err error) {
 	res, err := s.SSOUserClient.PostJson("/api/v1/wx/mini/user/infoList", map[string]interface{}{
-		"ids":      ids,
-		"clientId": clientId,
+		"ids": ids,
 	})
 	if err == nil {
 		data := res.Data.(map[string]interface{})
