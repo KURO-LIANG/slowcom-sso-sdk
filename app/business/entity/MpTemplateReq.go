@@ -6,7 +6,7 @@ type MpTemplateReq struct {
 	PagePath        string                      `json:"pagePath" description:"小程序页面地址"`
 	MiniAppId       string                      `json:"miniAppId" description:"小程序APPID"`
 	UnionId         string                      `json:"unionId" description:"开放平台unionId，与用户ID二选一"`
-	TemplateId      string                      `json:"templateId" v:"required#模板ID不能为空" description:"公众号模板消息ID"`
+	MsgType         int8                        `json:"msgType" description:"消息类型 0-设备报警，1-入住成功，2-预订成功，3-订单来了(通知管家),4-取消预订"`
 }
 type TemplateDataItem struct {
 	Value string `json:"value"`
