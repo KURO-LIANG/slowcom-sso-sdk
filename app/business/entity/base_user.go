@@ -29,6 +29,8 @@ type BaseUserChannelInfo struct {
 	AppSecret  string `json:"appSecret" description:"公众号appSecret"` // 公众号appSecret
 	TemplateId string `json:"templateId" description:"用户所在渠道的公众号模板消息ID"`
 	MiniAppId  string `json:"miniAppId" description:"用户所在渠道的小程序id"`
+	SmsNum     int    `json:"smsNum" description:"短信数量"`
+	VmsNum     int    `json:"vmsNum" description:"语音数量"`
 }
 
 type RefreshTokenRes struct {
