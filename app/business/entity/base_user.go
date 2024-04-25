@@ -22,15 +22,16 @@ type BaseUserChannelInfoReq struct {
 	Ids []uint64 `json:"ids" description:"用户Ids"` // 用户ID
 }
 type BaseUserChannelInfo struct {
-	UserId     uint64 `json:"userId" description:"用户ID"`   // 用户ID
-	NickName   string `json:"nickName" description:"用户昵称"` // 用户昵称
-	MpOpenId   string `json:"mpOpenId" description:"用户的公众号openid"`
-	AppID      string `json:"appId" description:"用户所在渠道的公众号id"`
-	AppSecret  string `json:"appSecret" description:"公众号appSecret"` // 公众号appSecret
-	TemplateId string `json:"templateId" description:"用户所在渠道的公众号模板消息ID"`
-	MiniAppId  string `json:"miniAppId" description:"用户所在渠道的小程序id"`
-	SmsNum     int    `json:"smsNum" description:"短信数量"`
-	VmsNum     int    `json:"vmsNum" description:"语音数量"`
+	UserId       uint64 `json:"userId" description:"用户ID"`   // 用户ID
+	NickName     string `json:"nickName" description:"用户昵称"` // 用户昵称
+	MpOpenId     string `json:"mpOpenId" description:"用户的公众号openid"`
+	AppID        string `json:"appId" description:"用户所在渠道的公众号id"`
+	AppSecret    string `json:"appSecret" description:"公众号appSecret"` // 公众号appSecret
+	TemplateId   string `json:"templateId" description:"用户所在渠道的公众号模板消息ID"`
+	MiniAppId    string `json:"miniAppId" description:"用户所在渠道的小程序id"`
+	SmsNum       int    `json:"smsNum" description:"短信数量"`
+	VmsNum       int    `json:"vmsNum" description:"语音数量"`
+	PlatformName string `json:"platformName" description:"平台名称"`
 }
 
 type RefreshTokenRes struct {
