@@ -36,9 +36,11 @@ func (s *SSOPlatformRequest) UserChannelInfo(ids []uint64, clientId string) (lis
 	})
 	if err == nil {
 		data := res.Data.(map[string]interface{})
-		dataList := data["list"].([]interface{})
-		d, _ := json.Marshal(dataList)
-		_ = json.Unmarshal(d, &list)
+		if data["list"] != nil {
+			dataList := data["list"].([]interface{})
+			d, _ := json.Marshal(dataList)
+			_ = json.Unmarshal(d, &list)
+		}
 	}
 	return
 }
