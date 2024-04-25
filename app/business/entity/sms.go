@@ -12,4 +12,5 @@ type SendDeviceNoticeReq struct {
 	FamilyName      string `json:"familyName" description:"家庭名称"`
 	MsgAlarmType    int8   `json:"msgAlarmType" description:"消息类型"`
 	FromUserId      uint64 `json:"fromUserId" description:"家庭所属者用户ID"`
+	From            string `json:"from" description:"发送消息来源"`
 }
