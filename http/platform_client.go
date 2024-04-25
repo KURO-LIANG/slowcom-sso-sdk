@@ -15,7 +15,7 @@ type SSOPlatformClient struct {
 
 // Get get请求
 func (s *SSOPlatformClient) Get(url string) (response *BaseRes, err error) {
-	res, err := buildHttpClient().WithHeader("ClientId", s.ClientId).WithHeader("ClientSecret", s.ClientSecret).
+	res, err := buildHttpClient().WithHeader("Client-Id", s.ClientId).WithHeader("Client-Secret", s.ClientSecret).
 		Get(fmt.Sprintf("%s%s", s.BaseUrl, url), netUrl.Values{})
 	response, err = checkResponse(res, err)
 	return
@@ -23,7 +23,7 @@ func (s *SSOPlatformClient) Get(url string) (response *BaseRes, err error) {
 
 // PostJson json请求
 func (s *SSOPlatformClient) PostJson(url string, data interface{}) (response *BaseRes, err error) {
-	res, err := buildHttpClient().WithHeader("ClientId", s.ClientId).WithHeader("ClientSecret", s.ClientSecret).
+	res, err := buildHttpClient().WithHeader("Client-Id", s.ClientId).WithHeader("Client-Secret", s.ClientSecret).
 		PostJson(fmt.Sprintf("%s%s", s.BaseUrl, url), data)
 	response, err = checkResponse(res, err)
 	return
@@ -31,7 +31,7 @@ func (s *SSOPlatformClient) PostJson(url string, data interface{}) (response *Ba
 
 // PutJson json请求
 func (s *SSOPlatformClient) PutJson(url string, data interface{}) (response *BaseRes, err error) {
-	res, err := buildHttpClient().WithHeader("ClientId", s.ClientId).WithHeader("ClientSecret", s.ClientSecret).
+	res, err := buildHttpClient().WithHeader("Client-Id", s.ClientId).WithHeader("Client-Secret", s.ClientSecret).
 		PutJson(fmt.Sprintf("%s%s", s.BaseUrl, url), data)
 	response, err = checkResponse(res, err)
 	return
