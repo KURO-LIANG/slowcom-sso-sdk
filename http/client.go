@@ -8,10 +8,10 @@ import (
 )
 
 type SSOClient struct {
-	BaseUrl string
-	Token   string
-	Client  string
-	rwLock  sync.RWMutex
+	BaseUrl  string
+	Token    string
+	ClientId string
+	rwLock   sync.RWMutex
 }
 
 const (
@@ -33,7 +33,7 @@ func buildHttpClient() *httpclient.HttpClient {
 
 // Get get请求
 func (s *SSOClient) Get(url string) (response *BaseRes, err error) {
-	res, err := buildHttpClient().WithHeader("Authorization", s.Token).WithHeader("Client", s.Client).
+	res, err := buildHttpClient().WithHeader("Authorization", s.Token).WithHeader("ClientId", s.ClientId).
 		Get(fmt.Sprintf("%s%s", s.BaseUrl, url), netUrl.Values{})
 	response, err = checkResponse(res, err)
 	return
@@ -41,7 +41,7 @@ func (s *SSOClient) Get(url string) (response *BaseRes, err error) {
 
 // PostJson json请求
 func (s *SSOClient) PostJson(url string, data interface{}) (response *BaseRes, err error) {
-	res, err := buildHttpClient().WithHeader("Authorization", s.Token).WithHeader("Client", s.Client).
+	res, err := buildHttpClient().WithHeader("Authorization", s.Token).WithHeader("ClientId", s.ClientId).
 		PostJson(fmt.Sprintf("%s%s", s.BaseUrl, url), data)
 	response, err = checkResponse(res, err)
 	return
