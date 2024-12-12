@@ -50,3 +50,17 @@ func (s *SSOPlatformRequest) SendMpTemplateNotice(req *entity.MpTemplateReq) (re
 	res, err = s.SSOPlatformClient.PostJson("/platform/v1/mp/template/notice", req)
 	return
 }
+
+// GetChannelList 获取渠道列表
+func (s *SSOPlatformRequest) GetChannelList() (list []entity.ChannelList, err error) {
+	res, err := s.SSOPlatformClient.Get("/platform/v1/channel/list")
+	if err == nil {
+		data := res.Data.(map[string]interface{})
+		if data["list"] != nil {
+			dataList := data["list"].([]interface{})
+			d, _ := json.Marshal(dataList)
+			_ = json.Unmarshal(d, &list)
+		}
+	}
+	return
+}
