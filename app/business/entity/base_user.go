@@ -1,10 +1,11 @@
 package entity
 
 type BaseUserInfo struct {
-	UserId   uint64 `json:"userId" description:"用户ID"`        // 用户ID
-	NickName string `json:"nickName" description:"用户昵称"`      // 用户昵称
-	Avatar   string `json:"avatar" description:"用户头像"`        // 用户头像
-	Phone    string `json:"phone" description:"手机号"`          // 手机号
+	UserId   uint64 `json:"userId" description:"用户ID"`   // 用户ID
+	NickName string `json:"nickName" description:"用户昵称"` // 用户昵称
+	Avatar   string `json:"avatar" description:"用户头像"`   // 用户头像
+	Phone    string `json:"phone" description:"手机号"`     // 手机号
+	Email    string `json:"email" description:"邮箱"`
 	MaOpenId string `json:"maOpenId" description:"小程序openid"` // 小程序openid
 	UnionId  string `json:"unionId" description:"微信开放平台id"`   // 微信开放平台id
 }
