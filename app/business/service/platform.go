@@ -64,3 +64,27 @@ func (s *SSOPlatformRequest) GetChannelList() (list []entity.ChannelList, err er
 	}
 	return
 }
+
+// UserInfoByMpOpenId 获取公众号用户信息
+func (s *SSOPlatformRequest) UserInfoByMpOpenId(mpOpenId string, unionId string) (resData *entity.BaseUserInfo, err error) {
+	res, err := s.SSOPlatformClient.Get(fmt.Sprint("/platform/v1/getUserInfo?mpOpenId=", mpOpenId, "&unionId=", unionId))
+	if err == nil {
+		var mapData = res.Data.(map[string]interface{})
+		user := mapData["userInfo"].(map[string]interface{})
+		d, _ := json.Marshal(user)
+		_ = json.Unmarshal(d, &resData)
+	}
+	return
+}
+
+// SaveUserAccount 创建公众号用户信息
+func (s *SSOPlatformRequest) SaveUserAccount(req entity.CreateUserAccountReq) (resData *entity.BaseUserInfo, err error) {
+	res, err := s.SSOPlatformClient.PostJson("/platform/v1/createUserAccount", req)
+	if err == nil {
+		var mapData = res.Data.(map[string]interface{})
+		user := mapData["userInfo"].(map[string]interface{})
+		d, _ := json.Marshal(user)
+		_ = json.Unmarshal(d, &resData)
+	}
+	return
+}

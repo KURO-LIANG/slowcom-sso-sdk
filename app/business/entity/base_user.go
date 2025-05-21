@@ -42,3 +42,18 @@ type RefreshTokenRes struct {
 	MaOpenId   string        `json:"maOpenId" description:"小程序openid"` // 小程序openid
 	UnionId    string        `json:"unionId" description:"微信开放平台id"`   // 微信开放平台id
 }
+
+type CreateUserAccountReq struct {
+	UserId              uint64 `json:"userId" description:"用户ID"`        // 用户ID
+	MpOpenId            string `json:"mpOpenId" description:"公众号openid"` // 小程序openid
+	UnionId             string `json:"unionId" description:"微信开放平台id"`   // 微信开放平台id
+	SubscribeNum        int    `json:"subscribeNum" description:"关注次数"`
+	SubscribeScene      string `json:"subscribeScene" description:"返回用户关注的渠道来源，ADD_SCENE_SEARCH 公众号搜索，ADD_SCENE_ACCOUNT_MIGRATION 公众号迁移，ADD_SCENE_PROFILE_CARD 名片分享，ADD_SCENE_QR_CODE 扫描二维码，ADD_SCENEPROFILE LINK 图文页内名称点击，ADD_SCENE_PROFILE_ITEM 图文页右上角菜单，ADD_SCENE_PAID 支付后关注，ADD_SCENE_OTHERS 其他"`
+	SubscribeTime       string `json:"subscribeTime" description:"关注时间"`
+	CancelSubscribeTime string `json:"cancelSubscribeTime" description:"取消关注时间"`
+	QRSceneStr          string `json:"qrSceneStr" description:"二维码扫码场景"`
+	Language            string `json:"language" description:"语言"`
+	Subscribe           int    `json:"subscribe" description:"是否关注公众号 0-否；1-是；"`
+	LongAndLati         string `json:"longAndLati" description:"经纬度  经度,纬度"`
+	ChannelId           uint64 `json:"channelId" description:"渠道ID"`
+}
