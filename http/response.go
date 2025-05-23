@@ -33,6 +33,8 @@ func checkResponse(res *httpclient.Response, requestError error) (baseRes *BaseR
 	}
 	if baseRes.Code == 0 {
 		return
+	} else if baseRes.Code == 401 {
+		return baseRes, serror.New(baseRes.Code, "权限异常")
 	} else {
 		return baseRes, serror.New(baseRes.Code, baseRes.Message)
 	}
