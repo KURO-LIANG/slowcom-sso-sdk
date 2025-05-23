@@ -27,6 +27,7 @@ func checkResponse(res *httpclient.Response, requestError error) (baseRes *BaseR
 	if err != nil {
 		return nil, serror.ErrIs数据解析异常
 	}
+	fmt.Println(string(bytes))
 	err = json.Unmarshal(bytes, &baseRes)
 	if err != nil {
 		return nil, serror.ErrIs数据解析异常
