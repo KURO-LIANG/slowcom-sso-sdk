@@ -88,3 +88,20 @@ func (s *SSOPlatformRequest) SaveUserAccount(req entity.CreateUserAccountReq) (r
 	}
 	return
 }
+
+// UserInfoByChannelId 获取用户渠道信息
+func (s *SSOPlatformRequest) UserInfoByChannelId(ids []uint64, channelId uint64) (list []entity.BaseUserChannelInfo, err error) {
+	res, err := s.SSOPlatformClient.PostJson("/platform/v1/userInfoByChannelId", map[string]interface{}{
+		"ids":       ids,
+		"channelId": channelId,
+	})
+	if err == nil {
+		data := res.Data.(map[string]interface{})
+		if data["list"] != nil {
+			dataList := data["list"].([]interface{})
+			d, _ := json.Marshal(dataList)
+			_ = json.Unmarshal(d, &list)
+		}
+	}
+	return
+}
