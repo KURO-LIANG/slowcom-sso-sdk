@@ -21,9 +21,11 @@ func (s *SSOPlatformRequest) GetPlatformInfo(id uint64) (resData entity.ChannelI
 			return
 		}
 		var mapData = res.Data.(map[string]interface{})
-		platformInfo := mapData["platformInfo"].(map[string]interface{})
-		d, _ := json.Marshal(platformInfo)
-		_ = json.Unmarshal(d, &resData)
+		if mapData["platformInfo"] != nil {
+			platformInfo := mapData["platformInfo"].(map[string]interface{})
+			d, _ := json.Marshal(platformInfo)
+			_ = json.Unmarshal(d, &resData)
+		}
 	}
 	return
 }
@@ -70,9 +72,11 @@ func (s *SSOPlatformRequest) UserInfoByMpOpenId(mpOpenId string, unionId string)
 	res, err := s.SSOPlatformClient.Get(fmt.Sprint("/platform/v1/getUserInfo?mpOpenId=", mpOpenId, "&unionId=", unionId))
 	if err == nil {
 		var mapData = res.Data.(map[string]interface{})
-		user := mapData["userInfo"].(map[string]interface{})
-		d, _ := json.Marshal(user)
-		_ = json.Unmarshal(d, &resData)
+		if mapData["userInfo"] != nil {
+			user := mapData["userInfo"].(map[string]interface{})
+			d, _ := json.Marshal(user)
+			_ = json.Unmarshal(d, &resData)
+		}
 	}
 	return
 }
@@ -82,9 +86,11 @@ func (s *SSOPlatformRequest) SaveUserAccount(req entity.CreateUserAccountReq) (r
 	res, err := s.SSOPlatformClient.PostJson("/platform/v1/createUserAccount", req)
 	if err == nil {
 		var mapData = res.Data.(map[string]interface{})
-		user := mapData["userInfo"].(map[string]interface{})
-		d, _ := json.Marshal(user)
-		_ = json.Unmarshal(d, &resData)
+		if mapData["userInfo"] != nil {
+			user := mapData["userInfo"].(map[string]interface{})
+			d, _ := json.Marshal(user)
+			_ = json.Unmarshal(d, &resData)
+		}
 	}
 	return
 }
