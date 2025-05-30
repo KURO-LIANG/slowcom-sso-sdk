@@ -6,6 +6,7 @@ type BaseUserInfo struct {
 	Avatar   string `json:"avatar" description:"用户头像"`   // 用户头像
 	Phone    string `json:"phone" description:"手机号"`     // 手机号
 	Email    string `json:"email" description:"邮箱"`
+	MpOpenId string `json:"mpOpenId" description:"用户的公众号openid"`
 	MaOpenId string `json:"maOpenId" description:"小程序openid"` // 小程序openid
 	UnionId  string `json:"unionId" description:"微信开放平台id"`   // 微信开放平台id
 }
